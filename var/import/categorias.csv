@@ -1,0 +1,874 @@
+ID_CATEGORIA;NOMBRE_CATEGORIA;CATEGORIA_PADRE
+4;JARDINERIA Y AGRICULTURA ;0
+123;Mallas agricolas;4
+127;Setos, césped y ocultación;4
+141;Cortacesped;4
+145;Motoazadas a gasolina y accesorios;4
+147;Bombas de agua;4
+148;Herramientas manuales para el cuidado del jardin;4
+149;Tijeras de poda y recoleccion;4
+524;Tijeras 1 mano;149
+525;Tijeras 2 manos;149
+526;Accesorios y repuestos Tijeras de podar;149
+151;Navajas;4
+152;Azadas;4
+153;Alcotanas, arcos de sierra y horcas;4
+154;Rastrillos;4
+155;Hachas ;4
+156;Mantas y plasticos para agricultura;4
+170;Hidrolimpiadoras;4
+171;Sulfatadoras y pulverizadores;4
+174;Mosquiteras / antimosquitos / antipalomas;4
+512;Recortasetos y accesorios;4
+511;Recortabordes y accesorios;4
+514;Desbrozadores eléctricos y accesorios;4
+515;Aspiradores sopladores y accesorios;4
+516;Biotrituradores y accesorios;4
+518;Desbrozadores gasolina y accesorios;4
+522;Motosierras y accesorios;4
+527;Serruchos de podar y accesorios;4
+529;Mangueras;4
+531;Accesorios manguera Metal;4
+532;Accesorios manguera Plástico;4
+533;Microrriego;4
+534;Programadores riego;4
+535;Regaderas y pluviómetros;4
+536;Aspersores;4
+537;Portamangueras;4
+578;Abonos para plantas;4
+677;Antiplagas;4
+925;Ahuyentadores ultrasonido;677
+927;Tela mosquitera en rollos;677
+928;Mosquiteras fabricadas;677
+929;Ahuyentador mosquitos (velas y antorchas);677
+930;Trampas;677
+931;Cebos;677
+932;Exterminadores de insectos eléctricos;677
+943;Pinchos antipalomas y cinta antipájaros;677
+1128;Semillas;4
+185;COCINA Y MESA;0
+291;Bodega y vino;185
+308;Grifos barril;291
+309;Decantadores y aireadores;291
+310;Conservadores y tapones;291
+311;Sacacorchos;291
+1119;Botelleros;291
+296;Sartenes;185
+297;Paelleras y paelleros;185
+298;Planchas y asadoras;185
+301;Soportes de jamón;185
+302;Cubos y baños galvanizados;185
+303;Utensilios cocina;185
+306;Alfombras cocina;185
+1152;Cuchiilos de untar y mondadores;185
+433;Envasadoras al vacio;185
+538;Máquinas picar y accesorios;185
+305;Repuestos y accesorios máquinas;538
+539;Máquinas;538
+563;Repuestos Ollas y Cafeteras;185
+910;Cuchillos serie Universal;185
+912;Cuchillos serie Génova;185
+913;Cuchillos serie Latina;185
+914;Cuchillos jamoneros/queseros;185
+915;Juegos de cuchillos;185
+916;Cuchillos Chuleteros;185
+917;Piquetas / Chairas / Piedras de afilar;185
+918;Tijeras de cocina;185
+1035;Guantes anticorte;185
+920;Cubiertos serie Valencia;185
+921;Cubiertos serie Murano;185
+922;Cubiertos serie Mirage;185
+923;Cubiertos serie Flair;185
+924;Balanzas;185
+1103;Antideslizantes;185
+1095;Manteles y hules;185
+1127;Cafeteras;185
+1130;Recipientes y Botellas herméticas;185
+1131;Termos;185
+1134;Cuchillos serie ASPEN;185
+1135;Cuchillos serie ALASKA;185
+1136;Cuchillos serie GRENOBLE;185
+1137;Cuchillos y Tenedores serie MONTANA;185
+1138;Utensilios cocina madera;185
+8;HERRAMIENTAS;0
+22;Herramientas manuales;8
+15;Formones y gubias;22
+39;Martillos;22
+40;Tenazas;22
+41;Navajas/ Punzones/ Agujas;22
+43;Cutter;22
+44;Llaves combinadas;22
+45;Torniquetes;22
+46;Herramientas y artículos Fontaneria;22
+48;Sierras / Guías / Marquetería;22
+810;Reglas y escuadras;22
+54;Sopletes;22
+58;Paletas y paletines;22
+61;Herramientas Soladores y alicatadores;22
+62;Mazas y Picos;22
+63;Palas y Palotes;22
+64;Niveles ;22
+65;Flexometros/ Metros/ Cintas métricas;22
+66;Marcadores y señaladores;22
+67;Calibres;22
+809;Tiralineas y plomadas;22
+91;Cortarremaches y Cortacables;22
+93;Cepillos;22
+94;Cortacristales;22
+95;Elevación;22
+256;Ferrallistas;22
+259;Cepillos manuales / Barrenas / Escofinas;22
+260;Sargentos de esquina y torniquetes;22
+261;Herramientas de Marquetería;22
+264;Llaves allen ;22
+265;Llaves de vaso ;22
+691;Adaptadores;265
+692;Mangos corredizos;265
+693;Alargaderas;265
+694;Llaves de carraca;265
+695;Juegos;265
+696;Llaves vaso mango T;265
+697;Vasos;265
+266;Arcos de sierra y accesorios;22
+267;Botadores / Granetes / Punzones;22
+338;Extractores;22
+373;Tijeras industriales;22
+414;Cortafrios y punteros;22
+488;Remachadoras y remaches;22
+489;Grapadoras y Grapas;22
+491;Serruchos;22
+649;Destornilladores boca vaso hexagonal;22
+650;Destornilladores boca plana estampada;22
+651;Destornilladores boca plana vaciada;22
+652;Destornilladores boca Torx;22
+653;Destornilladores boca Philips;22
+654;Destornilladores boca pozidriv;22
+655;Destornilladores buscapolos;22
+656;Destornilladores seguridad 1000 v.;22
+657;Juegos de destornilladores;22
+658;Destornilladores especiales;22
+660;Destorpuntas boca plana;22
+661;Destorpuntas boca hexagonal;22
+662;Destorpuntas boca Philips;22
+663;Destorpuntas boca Torx;22
+664;Destorpuntas boca pozidriv;22
+665;Portapuntas;22
+666;Destorpuntas boca vaso hexagonal;22
+667;Juegos de destorpuntas;22
+668;Llaves bujía;22
+669;Llaves ajustables;22
+670;Llaves fijas;22
+671;Llaves acodadas;22
+672;Llaves pipa;22
+673;Llaves tubo;22
+674;Juegos de llaves;22
+675;Llaves cruz;22
+698;Tornillos de banco;22
+699;Mordazas;22
+700;Llaves Torx;22
+701;Alicates universales;22
+702;Alicates de corte ;22
+703;Alicates boca plana;22
+704;Alicates boca curva;22
+706;Alicates pelacables;22
+707;Alicates mini;22
+708;Alicates especiales;22
+709;Alicates arandelas;22
+710;Alicates de seguridad;22
+721;Llanas y talochas;22
+722;Espátulas y rascadores;22
+737;Limas para hierro;22
+738;Limas para madera;22
+739;Limas para afilar;22
+740;Juegos de limas;22
+741;Sacabocados;22
+1153;Mangos;22
+723;Mangos para Palas;1153
+724;Mangos para Raederas;1153
+725;Mangos para Macetas;1153
+726;Mangos para Alcotanas;1153
+727;Mangos para Mazas;1153
+728;Mangos para Limas;1153
+729;Mangos para Martillos;1153
+730;Mangos para Azadas;1153
+731;Mangos para Cepillos;1153
+732;Mangos para Picos ;1153
+733;Mangos para Hachas;1153
+735;Mangos para Rastrillos;1153
+736;Mangos para Espátulas soladores;1153
+748;Bolsas y fundas herramientas;22
+749;Cajas de herramientas y Carros;22
+811;Medidores laser;22
+812;Tubo transparente de nivel;22
+813;Macetas;22
+814;Alcotanas;22
+815;Mazas de goma;22
+816;Tijeras de chapa;22
+817;Cribas para arena;22
+818;Raederas y Rastrillos;22
+933;Tijeras de cocina;22
+934;Tijeras de costura y confección;22
+935;Tijeras de higiene personal;22
+1133;Destornilladores boca Spanner;22
+1157;Llaves de gancho articuladas;22
+23;Herramientas electricas;8
+1151;Sierras eléctricas;23
+29;Fresadoras eléctricas;23
+30;Pistolas termocolantes;23
+32;Polipastos eléctricos de elevación;23
+33;Aspiradores eléctricos y accesorios;23
+34;Bombas de agua;23
+35;Hormigoneras;23
+37;Hidrolimpiadoras y accesorios;23
+1144;Esmeriladoras;23
+268;Accesorios para herramientas eléctricas;23
+269;Brocas para madera;268
+271;Brocas para paredes;268
+272;Brocas punta diamante;268
+274;Portabrocas y llaves;268
+275;Cepillos / Bonetes / Platos de caucho;268
+278;Hojas de sierra;268
+279;Cuchillas y correas;268
+576;Juegos y maletines de brocas;268
+339;Fresas;268
+340;Baterias y cargadores;268
+341;Varios;268
+349;Brocas Sds plus / Sds Max;268
+579;Brocas para cerámica y mármol;268
+580;Brocas para cristal;268
+581;Brocas Multiusos;268
+582;Brocas Escalonadas;268
+583;Brocas para grés porcelánico;268
+716;Brocas Acero rápido HSS (Para hierro);268
+717;Brocas Titanio HSS (Para hierro);268
+718;Brocas Cobalto HSS (Para hierro);268
+719;Brocas HSS Sprint (Para hierro);268
+720;Brocas HSS Super (Para hierro);268
+877;Coronas bimetal;268
+878;Coronas widia;268
+879;Coronas para madera;268
+880;Soportes para coronas;268
+881;Juegos de coronas;268
+882;Accesorios lija;268
+883;Discos lija;268
+884;Lijas recambio electroportátiles;268
+885;Abanicos lija;268
+886;Discos de láminas;268
+887;Muelas de corindón;268
+888;Muelas de carburo de silicio;268
+889;Muelas para esmeriladoras;268
+891;Discos de corte abrasivos;268
+892;Discos de corte diamante;268
+1123;Brocas Hss Sprint Master (Para hierro);268
+1124;Brocas Hss Pro (Para hierro);268
+1125;Brocas para granito;268
+1145;Amoladoras;23
+1146;Multiherramientas;23
+1149;Lijadoras y Pistolas decapantes;23
+1147;Multiherramientas (Accesorios);23
+1148;Amoladoras (Accesorios);23
+1150;Cepillos eléctricos;23
+492;Máquinas de soldar y accesorios;23
+496;Soldadores de estaño y accesorios;23
+560;Taladros y Atornilladores eléctricos;23
+637;Martillos demoledores y electroneumáticos;23
+638;Mezcladores eléctricos y accesorios;23
+639;Niveles y medidores laser;23
+1109;Taladros de columna;23
+1161;Generadores;23
+92;Herramientas agricolas;8
+342;Azadas;92
+337;Tijeras de podar (Accesorios y recambios);92
+343;Serruchos de podar;92
+344;Tijeras de podar y recolectar;92
+345;Rastrillos y Horcas;92
+346;Hachas / Tajamatas / Hoces;92
+347;Serruchos de podar (Recambios);92
+348;Navajas;92
+9;SEGURIDAD Y VESTUARIO;0
+830;Protectores auditivos;9
+744;Trajes de agua;9
+226;Señalización;9
+239;Balizas señalización y cinta seguridad;226
+240;Pintura trazadora en spray;226
+241;Tela balizamiento y setas protectoras;226
+893;Carteles fluorescentes;226
+894;Carteles no fluorescentes;226
+227;Gafas protectoras;9
+229;Mascarillas respiratorias y filtros;9
+230;Fajas / Rodilleras / Muñequeras;9
+231;Arneses, y cinturones de seguridad;9
+232;Calzado de seguridad;9
+1107;Deportivas seguridad S-3;232
+836;Botas seguridad S1P;232
+837;Zapatos seguridad S1P;232
+838;Deportivas seguridad S1P;232
+840;Botas de campo;232
+1121;Botas seguridad S-3;232
+234;Buzos de trabajo;9
+236;Chalecos de trabajo;9
+237;Alta visibilidad;9
+820;Guantes de piel;9
+821;Guantes para soldadores;9
+822;Guantes de nitrilo;9
+823;Guantes de poliuretano;9
+824;Guantes de PVC;9
+825;Guantes de algodón;9
+826;Guantes domésticos;9
+827;Guantes de latex;9
+828;Guantes desechables;9
+829;Cascos protectores;9
+831;Mascarillas desechables;9
+832;Guantes de nylon;9
+833;Pantallas de soldar;9
+834;Protectores faciales;9
+846;Chaquetas de trabajo;9
+847;Pantalones de trabajo;9
+848;Petos de trabajo;9
+850;Buzos desechables;9
+851;Jerseys de trabajo;9
+852;Parkas y Mochilas de trabajo;9
+1154;Botas de goma;9
+841;Botas goma altas negras;1154
+842;Botas goma altas verdes;1154
+843;Botas goma bajas negras;1154
+844;Botas goma altas verdes Seguridad;1154
+845;Botas goma altas verdes de invierno;1154
+1158;Mamparas y Rótulos de protección;9
+10;FERRETERIA;0
+11;Pintura;10
+1113;Esmaltes;11
+281;Brochas, pinceles y paletinas;11
+282;Rodillos y cubetas;11
+284;Mezcladores;11
+543;Máquinas de pintar;11
+544;Máquinas de pintar (Repuestos) ;11
+801;Sprays pintura standar;11
+802;Sprays pintura trazadores obras;11
+803;Sprays de pintura específicos;11
+804;Espátulas y rascadores;11
+805;Fieltros y plásticos multiusos;11
+806;Cintas Maskin-tape;11
+807;Pistolas de pintar;11
+808;Masillas / Disolventes / Cementos y colas;11
+12;Sellantes / Adhesivos / Masillas / Cintas;10
+59;Cementos y colas;12
+1096;Masilla refractaria;12
+452;Colas;12
+453;Pegamentos Nural específicos;12
+454;Pegamentos Cianocrilatos rápidos;12
+455;Pegamentos de contacto;12
+456;Pegamentos Pvc y limpiador;12
+457;Masilla para madera;12
+458;Cinta Americana / Fibra de vidrio;12
+459;Cintas de embalar;12
+460;Silicona en cartucho;12
+461;Silicona en barra;12
+462;Pistolas y aplicaddores de silicona;12
+463;Anclajes químicos;12
+619;Cintas Aislantes;12
+620;Cintas Doble cara;12
+621;Cintas Maskin-tape;12
+622;Cintas PTFE / Sanitaria;12
+623;Cintas Autosoldantes / Aluminio;12
+624;Cintas Antipájaros;12
+625;Cintas Antideslizantes / Fotoluminiscentes;12
+630;Reparador de esmalte;12
+631;Pegamentos especiales sin clavo y extrafuerte;12
+632;Masillas de poliuretano;12
+633;Masilla MS Universal elástico;12
+634;Masilla de montaje;12
+635;Ceras para madera;12
+1112;Plásticos y Papel para embalar;12
+18;Fijacion y Soportes;10
+69;Tornillos;18
+598;Tirafondos pozidriv;69
+599;Tirafondos exagonales ;69
+617;Tornillos broca;69
+1101;Tornillos para tiradores muebles;69
+73;Soportes TV ;18
+74;Ganchos multiuso;18
+97;Accesorios para cable  y alambre;18
+981;Grilletes;97
+982;Guardacabos;97
+983;Sujetacables;97
+984;Tensores;97
+985;Ganchos de carga;97
+986;Ganchos uralita;97
+987;Ganchos S;97
+988;Enganches rápidos de cadena;97
+989;Pasadores;97
+990;Mosquetones bombero;97
+991;Anillas;97
+992;Mosquetones de muelle;97
+993;Mosquetones anilla giratoria;97
+994;Poleas;97
+548;Pinzas de sujección;18
+597;Ganchos lámpara y accesorios;18
+600;Alcayatas;18
+601;Hembrillas y Cáncamos;18
+602;Arandelas;18
+603;Puntas;18
+604;Tuercas;18
+605;Anclajes;18
+606;Anclajes metálicos;605
+607;Anclajes químicos;605
+608;Bridas;18
+609;Abrazaderas;18
+770;Abrazaderas metálicas M6;609
+771;Abrazaderas reforzadas Super;609
+772;Abrazaderas sin fin zincadas;609
+773;Abrazaderas sin fin inoxidables;609
+774;Abrazaderas Butaclamp;609
+775;Abrazaderas especiales;609
+776;Cinta perforada;609
+1132;Abrazaderas 2 Orejas;609
+610;Tacos ;18
+792;Tacos plástico blancos;610
+793;Tacos nylon grises;610
+794;Tacos para sanitarios;610
+795;Tacos con tornillo;610
+796;Tacos mini;610
+797;Tacos para pladur;610
+798;Tacos SN;610
+799;Tacos multiacción MU;610
+800;Tacos multiacción MU con tornillo;610
+611;Grapas metálicas;18
+612;Angulos y placas;18
+613;Colgadores;18
+614;Soportes para madera;18
+615;Varilla roscada;18
+616;Espigas de madera;18
+618;Chinchetas y tachuelas;18
+1086;Caballetes ;18
+1129;Palomillas aire acondicionado;18
+19;Trefileria;10
+72;Mallas metálicas;19
+474;Mallas de plástico;19
+475;Grapas y pasadores para cercados;19
+476;Mallas mosquiteras;19
+477;Malla de sombreo clásica;19
+584;Alambres especiales;19
+585;Alambre galvanizado;19
+586;Alambre latón;19
+587;Alambre plastificado;19
+589;Cadena decorativa;19
+590;Cadena pulida;19
+591;Cadena zincada;19
+592;Cadena de plástico;19
+593;Ronzales de cadena;19
+594;Cable de acero;19
+1076;Alambre para atadura de plantas;19
+967;Grilletes;19
+968;Guardacabos;19
+969;Sujetacables;19
+970;Tensores;19
+971;Ganchos de carga;19
+972;Ganchos uralita;19
+973;Ganchos S;19
+974;Enganches rápìdos cadena;19
+975;Pasadores;19
+976;Mosquetones bombero;19
+977;Anillas;19
+978;Mosquetones de muelle;19
+979;Mosquetones anilla giratoria;19
+980;Poleas;19
+1077;Malla de sombreo al 90%;19
+21;Carretillas y transpaletas;10
+787;Carretillas;21
+788;Transpaletas de almacén;21
+897;Ruedas para carretillas;21
+36;Escaleras;10
+481;Escaleras Industriales;36
+482;Escaleras Domésticas;36
+483;Recambios escaleras;36
+895;Andamios;36
+51;Cordeleria;10
+53;Abrasivos;10
+350;Discos de corte abrasivos;53
+351;Lijas recambio electroportátiles;53
+352;Piedras de afilar y muelas;53
+353;Cepillos;53
+641;Discos lija;53
+642;Abanicos lija;53
+643;Discos laminas;53
+644;Esponjas y tacos de lija;53
+645;Lana de acero;53
+646;Accesorios lija;53
+647;Pliegos de lija;53
+746;Discos de corte diamante;53
+76;Coche;10
+750;Cargabaterías y pinzas ;76
+751;Gatos y herramientas;76
+752;Herramientas de engrase;76
+753;Pulpos y agarres;76
+754;Limpieza del automovil;76
+755;Espátulas carrocero;76
+756;Antirrobos y protectores;76
+757;Lámparas y linternas ;76
+77;Moto;10
+758;Antirrobos;77
+759;Bombas de inflar;77
+760;Pulpos y agarres;77
+761;Carga-baterias y pinzas;77
+762;Artículos de limpieza;77
+78;Bicicleta;10
+763;Antirrobos;78
+764;Pulpos y agarres;78
+765;Bombas de inflar;78
+766;Soportes para bici;78
+767;Linternas;78
+768;Herramientas y parches;78
+79;Aceites y lubricantes;10
+178;Suelos de goma / Pvimentos y felpudos;10
+257;Cubos de goma y plástico;10
+293;Cortinas;10
+568;Terminales;293
+567;Anillas;293
+316;Rieles ;293
+328;Barras de madera;293
+1057;Soportes tubo ovalado;293
+331;Barras de forja;293
+332;Barras zirconio;293
+333;Barras de chapa;293
+541;Estores;293
+542;Rieles y estores (Accesorios);293
+569;Complementos cortinería;293
+571;Set cortina madera (Barra + accesorios);293
+572;Set cortina metal (Barra + accesorios);293
+573;Visillos;293
+574;Cortinas de baño;293
+1058;Soportes cromados;293
+1059;Soportes dorados;293
+1060;Soportes blancos;293
+1061;Soportes madera;293
+1062;Soportes forja;293
+1063;Soportes zirconio;293
+1108;Cortinas de tiras;293
+319;Conteras;10
+320;Colgadores y ganchos multiuso;10
+1064;Colgadores adhesivos;320
+1065;Colgadores de clavar y para cuadros;320
+1066;Colgadores y placas para muebles;320
+1067;Ganchos multiuso;320
+1068;Cuelgaescobas;320
+321;Imanes;10
+375;Rejillas ventilación;10
+354;Herrajes;10
+376;Materiales varios de construcción;10
+712;Guardavivos y otros;376
+713;Tapajuntas y pisacables;376
+714;Malla revoco;376
+441;Reguladores de gas;10
+442;Mascotas;10
+443;Persianas / Burletes;10
+936;Cinta para persianas;443
+937;Recogedores y accesorios persiana;443
+938;Topes de persiana;443
+939;Bureltes metálicos con cepillo;443
+940;Burletes de caucho;443
+941;Burletes de espuma;443
+942;Buerletes metálicos con goma;443
+1078;Burletes PVC con cepillo;443
+1079;Burletes PVC con goma;443
+464;Navidad;10
+478;Aire Comprimido;10
+31;Enchufes y racores;478
+479;Máquinas y herramientas aire comprimido;478
+480;Mangueras aire comprimido;478
+575;Barras y complementos armario;10
+1033;Buzones y Comunidades;10
+595;Bolsas agua caliente;10
+715;Tapajuntas y pisacables;10
+819;Espuertas y gavetas albañil;10
+896;Ruedas;10
+785;Ruedas Industriales;896
+786;Ruedas de carretilla;896
+789;Ruedas domésticas;896
+1155;Balanzas y Basculas;10
+1049;Soportes TV;10
+1050;Soportes electrodomésticos y cocina;10
+1051;Soportes para somier;10
+1052;Palomillas;10
+1053;Ganchos multiuso;10
+1054;Ganchos carnicero;10
+1055;Cierres de caja y de cartola;10
+1056;Angulos;10
+1114;Bidones;10
+1156;Lupas;10
+1159;Relojes;10
+16;ELECTRICIDAD;0
+80;Pilas;16
+81;Linternas;16
+84;Mecanismos;16
+86;Programadores;16
+87;Telefonia / TV / Video;16
+88;Extensibles / Prolongadores / Guias;16
+89;Polimetros y Tester;16
+129;Iluminacion jardín;16
+685;Focos y recambios;16
+678;Bombillas LED;16
+679;Bombillas fluorescentes;16
+681;Bombillas incandescentes especiales;16
+682;Tubos fluorescentes;16
+684;Bombillas halogenas;16
+686;Plafones;16
+687;Faroles;16
+743;Timbres / Alarmas / Domótica;16
+857;Lámparas portátiles;16
+858;Luces de Navidad;16
+859;Bases y clavijas Industriales;16
+860;Bases y clavijas domésticas;16
+861;Bases múltiples;16
+862;Adaptadores;16
+863;Fichas de empalme;16
+864;Cinta aislante;16
+865;Cajas de empotrar;16
+866;Fusibles;16
+867;Canaletas;16
+868;Portalámparas;16
+869;Interruptores;16
+870;Herramientas para electricidad ;16
+871;Tijeras electricista;870
+872;Navajas y pelacables electricista;870
+873;Alicates electricista;870
+874;Destornilladores electricistas;870
+875;Guias pasahilos;870
+876;Fundas para herramientas;870
+1098;Grapillas para cable;16
+17;VENTILACION Y CALEFACCION;0
+186;Ventiladores;17
+193;Estufas radiantes y halógenas;17
+192;Termoventiladores y termoconvectores;17
+188;Calor en jardín;17
+194;Radiadores;17
+195;Estufas eléctricas y gas infrarrojos;17
+197;Accesorios para chimeneas ;17
+198;Aspirador de cenizas;17
+545;Estufas de leña;17
+196;Estufas de leña;545
+546;Codos para estufas;545
+853;Tubos para estufa ;545
+854;Sombreros para estufas;545
+855;Plafones / Reducciones y Abrazaderas estufa;545
+856;Repuestos para Estufas de leña;545
+75;BAÑO Y FONTANERIA;0
+356;Accesorios baño;75
+565;Filtros agua ;75
+245;Grifería lavabo y bidé;75
+246;Grifería ducha y bañera;75
+247;Grifería temporizada;75
+250;Grifos de Fregadero;75
+251;Grifos jardín rústicos;75
+252;Sopletes y estaño;75
+253;Latiguillos;75
+254;Sifones y válvulas;75
+255;Sumideros, calderetas y botes sifónicos;75
+355;Cortinas de baño;75
+564;Agarres ducha;75
+366;Barras cortina baño;75
+377;Evacuación;75
+378;Tapones de goma y cadenas;75
+379;Grifos y gomas lavadora;75
+380;Racores y juntas;75
+382;Atomizadores;75
+411;Monturas grifo;75
+412;Embellecedores / Plafones / Soportes;75
+413;Cisternas;75
+901;Descargadores de cisterna;413
+902;Boyas y flotadores cisternas;413
+903;Despiece de cisterna;413
+904;Gomas y juntas para cisternas;413
+905;Tanques de cisterna;413
+431;Flexos y manerales ducha;75
+547;Grifos esfera y llaves de paso;75
+550;Tubos salida de humos;75
+629;Materiales varios fontaneria;75
+742;Herramientas fontanería;75
+790;Tapas WC;75
+791;Alfombras de baño;75
+906;Grifería especial;75
+907;Accesorios para fregaderos;75
+908;Grifos para fuentes;75
+909;Grifos de latón;75
+99;CERRAJERIA;0
+207;Cerraduras Seguridad y antipánico;99
+385;Cerraduras Azbe;207
+390;Cerraduras Tesa;207
+396;Cerraduras Ucem;207
+403;Cerraduras Fac;207
+435;Cerraduras Jis;207
+210;Cerraduras puerta cristal y portero electrónico;99
+400;Cerraduras Jis;210
+436;Cerraduras CBM;210
+438;Cerraduras Iseo;210
+447;Cerraduras Wolfpack;210
+211;Cerraduras de buzón y mueble;99
+212;Manillas, manillones y pomos de paso;99
+215;Números y Letras;99
+217;Cajas fuertes de empotrar;99
+218;Cajas fuertes de sobreponer ;99
+219;Cajas de caudales y archivo de llaves;99
+220;Candados Arco normal;99
+221;Candados Persiana / Empotrar / Tijera;99
+222;Candados antirrobo vehículos;99
+223;Portacandados;99
+383;Cerraduras de embutir Azbe;99
+384;Cerraduras de sobreponer Azbe;99
+386;Cerrojos Azbe;99
+387;Cilindros Azbe;99
+388;Cerraduras de embutir Tesa;99
+389;Cerraduras de sobreponer Tesa;99
+391;Cerrojos Tesa;99
+392;Cilindros Tesa;99
+420;Cerrojos Wolfpack;99
+394;Cerraduras de embutir Ucem;99
+395;Cerraduras de sobreponer Ucem;99
+445;Cilindros Wolfpack;99
+398;Cilindros Ucem;99
+399;Cerraduras de sobreponer Jis;99
+401;Cerraduras de sobreponer Fac;99
+404;Cerrojos Fac;99
+405;Cilindros Fac;99
+406;Cerraduras de embutir CVL;99
+407;Cerraduras de sobreponer CVL;99
+408;Cilindros CVL;99
+409;Cerrojos CVL;99
+415;Cerraduras de embutir Lince;99
+416;Cerraduras de sobreponer Lince;99
+417;Cerrojos Lince;99
+418;Cilindros Lince;99
+421;Pomos Tesa;99
+422;Pomos Ucem;99
+423;Pomos Wolfpack;99
+1034;Buzones y Comunidades;99
+428;Muelles cierrapuertas Ucem;99
+429;Muelles cierrapuertas Telesco;99
+430;Muelles cierrapuertas Wolfpack;99
+434;Muelles cierrapuertas Tesa;99
+437;Cerraduras de embutir Iseo;99
+439;Cilindros Iseo;99
+440;LLaveros, portaetiquetas, aldabillas, garras de marco;99
+1002;Candados Arco largo;99
+1003;Candados de combinación;99
+1006;Bisagras de cazoleta;99
+1007;Bisagras zincadas;99
+1008;Bisagras latonadas;99
+1010;Bisagra de piano;99
+1011;Bisagras de seguridad;99
+1012;Bisagras tipo T;99
+1013;Bisagras Ucem;99
+1015;Pernios torneados;99
+1017;Pernios de soldar;99
+1018;Pernios latonados con arandela;99
+1019;Pernios inoxidables y niquelados;99
+1020;Pasadores bicromatados;99
+1021;Pasadores latonados;99
+1022;Pasadores niquel;99
+1023;Pasadores de embutir;99
+1024;Picaportes Azbe;99
+1025;Picaportes Ucem;99
+1026;Picaportes Tesa;99
+1027;Picaportes Wolfpack;99
+1028;Mirillas ;99
+1029;Cadenas  de seguridad puertas;99
+1030;Topes para puertas;99
+1031;Golpetes;99
+1032;Pistones a gas para muebles;99
+1097;Cerraduras de sobreponer Wolfpack;99
+1102;Bisagras desmontables;99
+1111;Pasadores con base plástico;99
+1143;ORDEN Y LIMPIEZA;0
+957;Tijeras de costura y confección;1143
+960;Armarios;1143
+962;Módulos estantería (Kit);1143
+287;Cajas de herramientas y Carros;1143
+292;Tender / Planchar / Lavar;1143
+312;Tendederos;292
+313;Mesas de plancha;292
+314;Perchas;292
+596;Cestos ropa;292
+1099;Fundas protectoras electrodomésticos;292
+304;Termómetros;1143
+318;Felpudos;1143
+322;Papeleras;1143
+324;Cubos;1143
+325;Cepillos, recogedores y fregonas;1143
+326;Limpiacristales y Plumeros;1143
+327;Productos de limpieza;1143
+958;Tijeras de higiene personal;1143
+963;Estantería ranurada;1143
+964;Accesorios estantería ranurada;963
+965;Bateas estantería ranurada;963
+966;Perfil estantería ranurada;963
+627;Fieltros / Topes / Protectores muebles;1143
+1069;Topes para puertas y persianas;627
+1070;Deslizantes muebles;627
+1071;Fieltros y protectores adhesivos muebles;627
+1072;Tapatornillos adhesivos;627
+1073;Conteras de goma;627
+1074;Conteras de plástico;627
+1075;Lágrimas de silicona;627
+628;Seguridad hogar / Protección infantil;1143
+1046;Zapateros y pongotodo;1143
+1047;Casetas perro y metálicas;1143
+1048;Gavetas apliables;1143
+1087;Láminas adhesivas y Vinilos electroestáticos;1143
+1104;Quitapelusas;1143
+1110;Bayetas y Estropajos;1143
+1116;Carros de compra;1143
+1117;Bolsas guarda ropa;1143
+1120;Taburetes;1143
+1122;Pequeño electrodoméstico;1143
+1126;Corchos pared y Pizarras magnéticas;1143
+1140;MOBILIARIO Y COMPLEMENTOS JARDIN;0
+104;Sillas;1140
+105;Mesas;1140
+106;Tumbonas de jardín;1140
+108;Hamacas Colgantes;1140
+114;Bancos;1140
+115;Balancines;1140
+116;Sombrillas;1140
+117;Bases Sombrillas;1140
+118;Pergolas;1140
+120;Duchas de jardín;1140
+121;Celosias y vallas;1140
+122;Casetas Perros;1140
+124;Losetas Madera;1140
+125;Jardineras / Macetas / Platos;1140
+128;Fuentes y Grifos;1140
+130;Barbacoas y Accesorios;1140
+510;Exterminadores de insectos y plagas;1140
+162;Mantenimiento muebles madera;1140
+164;Baules;1140
+167;Buzones de jardín;1140
+172;Armarios y estantes;1140
+360;Columpios y Juegos de verano;1140
+688;Cojines para mobiliario jardín;1140
+690;Fundas para muebles de jardin;1140
+1100;Veletas;1140
+1115;Huertos urbanos;1140
+1141;PISCINA, PLAYA, CAMPING Y NIEVE;0
+509;Senderismo;1141
+169;Flotadores;1141
+1083;Piscinas infantiles e inflables;1141
+362;Buceo y natación;1141
+500;Tiendas campaña y sacos de dormir;1141
+501;Lámparas y hornillos;1141
+503;Neveras;1141
+504;Camas y colchones;1141
+506;Parasoles;1141
+507;Mesas / Sillas / Tumbonas;1141
+944;Limpieza y mantenimiento de piscinas;1141
+945;Dispensadores de cloro y termómetros;1141
+946;Cobertores y tapices piscinas;1141
+947;Hidrobombas y filtros piscinas;1141
+948;Infladores;1141
+949;Escaleras para piscinas;1141
+950;Mangueras para piscinas;1141
+951;Accesorios varios para piscinas;1141
+952;Piscinas estructura metálica;1141
+953;Piscinas Fast Set;1141
+955;Spas y Piscinas Hidromasaje ;1141
+1105;Barcas / Kayak / Tablas Paddle Surf;1141
+1160;Juegos para la nieve;1141

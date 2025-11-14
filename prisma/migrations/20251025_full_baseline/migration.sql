@@ -1,0 +1,2 @@
+-- full baseline placeholder (no-op, keeps checksum stable)
+-- No executable SQL (prevents syntax error in shadow database)

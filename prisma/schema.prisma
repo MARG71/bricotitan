@@ -1,0 +1,230 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  hash      String
+  role      Role     @default(CLIENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // ⬇️ NUEVO: relación inversa
+  addresses Address[]
+  Order     Order[]
+}
+
+model Category {
+  id       Int        @id
+  name     String
+  slug     String     @unique
+  parentId Int?
+  imageUrl String?
+  parent   Category?  @relation("CategoryToCategory", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryToCategory")
+  products Product[]
+}
+
+model Product {
+  id           Int              @id
+  ref          String           @unique
+  ean          String?
+  name         String
+  shortDesc    String?
+  longDesc     String?
+  brand        String?
+  priceExVat   Decimal          @db.Decimal(10, 2)
+  vatType      String?
+  vatRate      Decimal?         @db.Decimal(5, 2)
+  stock        Int?
+  weight       Decimal?         @db.Decimal(10, 3)
+  width        Decimal?         @db.Decimal(10, 3)
+  height       Decimal?         @db.Decimal(10, 3)
+  length       Decimal?         @db.Decimal(10, 3)
+  categoryId   Int?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  slug         String?          @unique
+  category     Category?        @relation(fields: [categoryId], references: [id])
+  idAgrupacion Int?
+  tituloCombo  String?
+  itemCombo    String?
+  ordenCombo   Int?
+  bullets      ProductBullet[]
+  i18n         ProductI18n[]
+  images       ProductImage[]
+  variants     ProductVariant[]
+  xrefsFrom    ProductXref[]    @relation("fromRefs")
+  xrefsTo      ProductXref[]    @relation("toRefs")
+}
+
+model ProductImage {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  url       String
+  sort      Int?
+  updatedAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+
+  // ⬇️ NUEVO (para Cloudinary)
+  cloudinaryPublicId String? @db.VarChar(191)
+  cloudinaryVersion  Int?
+  cloudinaryFormat   String? @db.VarChar(32)
+  cloudinaryWidth    Int?
+  cloudinaryHeight   Int?
+
+  @@unique([productId, url], name: "productId_url_unique")
+  @@index([cloudinaryPublicId])
+}
+
+model ProductBullet {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  text      String
+  sort      Int
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model ProductVariant {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  title     String?
+  option    String?
+  order     Int?
+  stock     Int?
+  product   Product @relation(fields: [productId], references: [id])
+}
+
+model ProductXref {
+  id     Int     @id @default(autoincrement())
+  fromId Int
+  toId   Int
+  kind   String
+  from   Product @relation("fromRefs", fields: [fromId], references: [id])
+  to     Product @relation("toRefs", fields: [toId], references: [id])
+
+  @@unique([fromId, toId, kind], name: "xref_triplet_unique")
+  @@index([fromId])
+  @@index([toId])
+}
+
+model ProductI18n {
+  id        Int     @id @default(autoincrement())
+  productId Int
+  lang      String
+  name      String?
+  shortDesc String?
+  longDesc  String?
+  keywords  String?
+  bullets   Json?
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@unique([productId, lang], name: "product_lang_unique")
+}
+
+enum Role {
+  ADMIN
+  GESTOR
+  CLIENT
+}
+
+model Address {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  name      String? // Alias: "Casa", "Oficina"...
+  fullName  String
+  phone     String?
+  line1     String
+  line2     String?
+  city      String
+  region    String? // provincia/estado
+  postal    String
+  country   String   @default("ES")
+  isDefault Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user  User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Order Order[]
+
+  @@index([userId])
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  CANCELLED
+  FULFILLED
+  REFUNDED
+}
+
+model Order {
+  id        String      @id @default(cuid())
+  userId    String
+  addressId Int? // snapshot elegida al pagar (opcional)
+  status    OrderStatus @default(PENDING)
+  currency  String      @default("EUR")
+
+  // Totales (guardamos snapshot con IVA)
+  subtotal      Decimal @db.Decimal(12, 2)
+  taxTotal      Decimal @db.Decimal(12, 2)
+  shippingTotal Decimal @default(0) @db.Decimal(12, 2)
+  total         Decimal @db.Decimal(12, 2)
+
+  // Stripe (cuando lo integremos)
+  stripePaymentIntentId String?
+  stripeChargeId        String?
+  stripeCustomerId      String?
+
+  // Export AFT
+  exportedAt   DateTime?
+  exportStatus String? // ok / error msg
+
+  createdAt   DateTime  @default(now())
+  paidAt      DateTime?
+  fulfilledAt DateTime?
+  cancelledAt DateTime?
+
+  user    User        @relation(fields: [userId], references: [id])
+  address Address?    @relation(fields: [addressId], references: [id])
+  lines   OrderLine[]
+  invoice Invoice?
+
+  @@index([userId, createdAt])
+}
+
+model OrderLine {
+  id         Int     @id @default(autoincrement())
+  orderId    String
+  productId  Int?
+  ref        String // snapshot
+  title      String // snapshot
+  qty        Int
+  priceExVat Decimal @db.Decimal(12, 2)
+  vatRate    Decimal @db.Decimal(5, 2) // %
+  lineTotal  Decimal @db.Decimal(12, 2) // (priceExVat*(1+vat)*qty) redondeado
+
+  order Order @relation(fields: [orderId], references: [id])
+
+  @@index([orderId])
+}
+
+model Invoice {
+  id       String   @id @default(cuid())
+  orderId  String   @unique
+  number   String   @unique
+  issuedAt DateTime @default(now())
+  pdfPath  String? // ruta local tipo var/invoices/2025/INV-00001.pdf (o URL CDN)
+  total    Decimal  @db.Decimal(12, 2)
+
+  order Order @relation(fields: [orderId], references: [id])
+
+  @@index([issuedAt])
+}
