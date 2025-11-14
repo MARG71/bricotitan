@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable no-console */
 import { PrismaClient } from '@prisma/client';
 import { meili, productsIndexName, getOrCreateProductsIndex } from '../lib/meili';
 import { mapProductoToDoc } from '../lib/search/mappers';
@@ -38,14 +39,16 @@ export async function runReindex() {
   const index = await getOrCreateProductsIndex();
 
   console.log('🧹 Limpiando documentos…');
-  try { await index.deleteAllDocuments(); } catch {}
+  try {
+    await index.deleteAllDocuments();
+  } catch {}
 
   await applyProductsIndexSettings();
 
   let sent = 0;
   for await (const batch of productStream(BATCH)) {
     const docs = batch.map(mapProductoToDoc);
-    await meili.index(productsIndexName).addDocuments(docs); // sin wait; Meili indexa en background
+    await meili.index(productsIndexName).addDocuments(docs); // Meili indexa en background
     sent += docs.length;
     console.log(`   → Encolados ${sent}`);
   }
@@ -55,8 +58,3 @@ export async function runReindex() {
 export async function disconnectPrisma() {
   await prisma.$disconnect();
 }
-
-include: {
-  category: true,
-  images: true, // si no existen, quítalo; el mapper ya cae a null
-},
