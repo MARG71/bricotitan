@@ -1,6 +1,6 @@
+// src/lib/catalog.ts
 import { prisma } from '@/lib/prisma'
-
-import { ensureLocale } from './i18n' // ajusta si lo tienes en otra ruta
+import type { Locale } from './i18n' // ⬅️ SOLO el tipo; si no existe, usa: type Locale = string
 
 /** ==== Tipos para el front ==== */
 export type ProductCard = {
@@ -214,11 +214,7 @@ export async function getProductsByCategory(q: CategoryQuery) {
   // 3) Traer productos ordenados para poder quedarnos con el "principal" de cada grupo
   const raw = await prisma.product.findMany({
     where,
-    orderBy: [
-      { idAgrupacion: 'asc' },
-      { ordenCombo: 'asc' },
-      { id: 'asc' },
-    ],
+    orderBy: [{ idAgrupacion: 'asc' }, { ordenCombo: 'asc' }, { id: 'asc' }],
     include: {
       images: { orderBy: { sort: 'asc' }, take: 1 },
       i18n: { where: { lang: { in: [lang, 'es'] } } },
@@ -237,10 +233,14 @@ export async function getProductsByCategory(q: CategoryQuery) {
   const toNumSafe = (v: any) => (typeof v === 'number' ? v : Number(v) || 0)
   grouped = grouped.sort((a, b) => {
     switch (q.sort) {
-      case 'priceAsc': return toNumSafe(a.priceExVat) - toNumSafe(b.priceExVat)
-      case 'priceDesc': return toNumSafe(b.priceExVat) - toNumSafe(a.priceExVat)
-      case 'nameAsc': return (a.slug ?? '').localeCompare(b.slug ?? '')
-      case 'nameDesc': return (b.slug ?? '').localeCompare(a.slug ?? '')
+      case 'priceAsc':
+        return toNumSafe(a.priceExVat) - toNumSafe(b.priceExVat)
+      case 'priceDesc':
+        return toNumSafe(b.priceExVat) - toNumSafe(a.priceExVat)
+      case 'nameAsc':
+        return (a.slug ?? '').localeCompare(b.slug ?? '')
+      case 'nameDesc':
+        return (b.slug ?? '').localeCompare(a.slug ?? '')
       case 'newest':
       default:
         return b.id - a.id
@@ -256,12 +256,12 @@ export async function getProductsByCategory(q: CategoryQuery) {
   return { total, items, page, pageSize, categoryId: category.id }
 }
 
-// Ajusta si tienes una util así; si no, usa directamente el string de lang
-
-function ensureLocale(lang: string) {
-  return (lang ?? 'es').toLowerCase()
+/** ==== Normalizador de locale ==== */
+function ensureLocale(lang?: string): Locale {
+  return (lang ?? 'es').toLowerCase() as Locale
 }
 
+/** ==== Detalle de producto por slug ==== */
 export async function getProductBySlug(slug: string, lang: string) {
   try {
     // Busca el producto por slug (único)
@@ -333,30 +333,29 @@ export async function getProductBySlug(slug: string, lang: string) {
   }
 }
 
-
 /** ==== Docs para el buscador ==== */
 export type SearchDoc = {
-  id: string;
-  slug: string;
-  title: string;
-  description?: string;
-  category: string;           // slug de top-level o el actual si no hay padre
-  subcategory?: string | null;// slug del segundo nivel si aplica
-  brand?: string | null;
-  price: number;              // precio con IVA si hay vatRate, si no, exVAT
-  priceExVat: number;         // para filtros si quieres
-  salePrice?: number | null;  // no lo tienes: dejamos null
-  inStock: boolean;
-  rating?: number | null;     // no lo tienes: null
-  tags?: string[];            // no lo tienes: []
-  attributes?: Record<string, any>;
-  imageUrl?: string | null;
-  createdAt?: string | undefined;
-  updatedAt?: string | undefined;
-};
+  id: string
+  slug: string
+  title: string
+  description?: string
+  category: string // slug de top-level o el actual si no hay padre
+  subcategory?: string | null // slug del segundo nivel si aplica
+  brand?: string | null
+  price: number // precio con IVA si hay vatRate, si no, exVAT
+  priceExVat: number // para filtros si quieres
+  salePrice?: number | null // no lo tienes: dejamos null
+  inStock: boolean
+  rating?: number | null // no lo tienes: null
+  tags?: string[]
+  attributes?: Record<string, any>
+  imageUrl?: string | null
+  createdAt?: string | undefined
+  updatedAt?: string | undefined
+}
 
 export async function getAllProductsForSearch(langInput?: string): Promise<SearchDoc[]> {
-  const lang = ensureLocale(langInput);
+  const lang = ensureLocale(langInput)
 
   const rows = await prisma.product.findMany({
     orderBy: { id: 'desc' }, // cambia a createdAt si la tienes
@@ -370,22 +369,22 @@ export async function getAllProductsForSearch(langInput?: string): Promise<Searc
         },
       },
     },
-  });
+  })
 
   return rows.map((p: any) => {
-    const displayName = pickI18nName(p, lang);
-    const parentSlug = p.category?.parent?.slug ?? null;
-    const catSlug = p.category?.slug ?? 'general';
+    const displayName = pickI18nName(p, lang)
+    const parentSlug = p.category?.parent?.slug ?? null
+    const catSlug = p.category?.slug ?? 'general'
 
     // Si hay padre: category = padre, subcategory = actual
     // Si no hay padre: category = actual, subcategory = null
-    const category = parentSlug ?? catSlug;
-    const subcategory = parentSlug ? catSlug : null;
+    const category = parentSlug ?? catSlug
+    const subcategory = parentSlug ? catSlug : null
 
-    const priceExVat = toNum(p.priceExVat) ?? 0;
-    const vatRate = toNum(p.vatRate); // porcentaje (p.ej. 21)
+    const priceExVat = toNum(p.priceExVat) ?? 0
+    const vatRate = toNum(p.vatRate) // porcentaje (p.ej. 21)
     const price =
-      vatRate == null ? priceExVat : Math.round(priceExVat * (1 + vatRate / 100) * 100) / 100;
+      vatRate == null ? priceExVat : Math.round(priceExVat * (1 + vatRate / 100) * 100) / 100
 
     return {
       id: String(p.id),
@@ -405,6 +404,6 @@ export async function getAllProductsForSearch(langInput?: string): Promise<Searc
       imageUrl: (p.images?.[0]?.url as string | null) ?? null,
       createdAt: p.createdAt?.toISOString?.(),
       updatedAt: p.updatedAt?.toISOString?.(),
-    };
-  });
+    }
+  })
 }
