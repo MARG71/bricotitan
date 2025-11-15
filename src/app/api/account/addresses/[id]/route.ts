@@ -44,7 +44,7 @@ export async function PATCH(
       province,
       country,
       isDefault: !!isDefault,
-      userId: session.user.id, // por seguridad, la ligamos al usuario
+      userId: session.user.id, // por seguridad
     },
   })
 
@@ -60,14 +60,12 @@ export async function PATCH(
 }
 
 // DELETE → borrar una dirección del usuario
-export async function DELETE(
-  _request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = params
+export async function DELETE(_request: Request, context: any) {
+  // Usamos any para que Next 15 no proteste por el tipo del segundo argumento
+  const { id } = context.params as { id: string }
+
   const session = (await requireAuth()) as AuthSession
 
-  // Solo borramos si la dirección pertenece al usuario
   await prisma.address.deleteMany({
     where: { id, userId: session.user.id },
   })
