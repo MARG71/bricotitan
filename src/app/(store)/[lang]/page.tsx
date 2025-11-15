@@ -1,7 +1,4 @@
 // src/app/(store)/[lang]/page.tsx
-import CategoryCard from '@/components/store/CategoryCard'
-import ProductCard from '@/components/store/ProductCard'
-import { getHomeData } from '@/lib/catalog'
 import Image from 'next/image'
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
@@ -25,7 +22,12 @@ async function getHomeData() {
   return { categories, products }
 }
 
-export default async function HomePage() {
+type HomePageProps = {
+  params: Promise<{ lang: string }>
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const { lang } = await params
   const { categories, products } = await getHomeData()
 
   return (
@@ -33,7 +35,7 @@ export default async function HomePage() {
       {/* 🏠 Hero */}
       <section className="relative w-full h-[320px] overflow-hidden">
         <Image
-          src="/images/banner-home.jpg" // 🔧 puedes cambiarlo por uno real
+          src="/images/banner-home.jpg" // 🔧 cambia por uno real si quieres
           alt="BRICOTITAN - Ferretería profesional"
           fill
           className="object-cover opacity-70"
@@ -67,7 +69,7 @@ export default async function HomePage() {
             {categories.map((cat) => (
               <div key={cat.id} className="group relative">
                 <Link
-                  href={`/${cat.slug}`}
+                  href={`/${lang}/c/${cat.slug}`}
                   className="block px-4 py-3 hover:bg-[#f97316] hover:text-white transition"
                 >
                   {cat.name}
@@ -79,7 +81,7 @@ export default async function HomePage() {
                     {cat.children.map((sub) => (
                       <Link
                         key={sub.id}
-                        href={`/${sub.slug}`}
+                        href={`/${lang}/c/${sub.slug}`}
                         className="block px-3 py-2 text-sm hover:bg-[#f97316] hover:text-white rounded-md transition"
                       >
                         {sub.name}
@@ -102,7 +104,7 @@ export default async function HomePage() {
             {products.map((p) => (
               <Link
                 key={p.id}
-                href={`/es/p/${p.slug}`}
+                href={`/${lang}/p/${p.slug}`}
                 className="group rounded-2xl bg-[#1c1c1c] border border-gray-700 hover:border-[#f97316] hover:shadow-lg transition p-3"
               >
                 {p.images?.[0] && (
