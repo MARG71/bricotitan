@@ -64,12 +64,17 @@ function getUnifiedBullets(product: any, i18n: unknown): BulletNorm[] {
 
 // -----------------------------
 // Next.js params
-type Params = { lang: string; slug: string }
-type PageProps = { params: Params }
+// -----------------------------
+// Next.js params
+type ProductPageParams = { lang: string; slug: string }
+type ProductPageProps = { params: ProductPageParams }
 
 // -----------------------------
 // SEO
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: ProductPageProps
+): Promise<Metadata> {
+
   const { lang, slug } = params
   const data = await getProductBySlug(slug, lang)
   if (!data?.product) return {}
@@ -98,7 +103,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 // -----------------------------
 // Page (Server Component)
-export default async function ProductPage({ params }: PageProps) {
+export default async function ProductPage({ params }: ProductPageProps) {
+
   const { lang, slug } = params
   const data = await getProductBySlug(slug, lang)
   if (!data?.product) notFound()
