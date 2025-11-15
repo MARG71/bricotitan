@@ -5,7 +5,7 @@ import { stripe } from '@/lib/stripe'
 import { computeTotals, CartLineInput } from '@/lib/orders/totals'
 
 export async function POST(req: Request) {
-  // 👇 Forzamos el tipo para que TS no lo infiera como {}
+  // Tipado relajado para evitar el error de session: {}
   const session: any = await getServerAuth()
 
   if (!session?.user?.id) {
@@ -51,12 +51,14 @@ export async function POST(req: Request) {
   })
 
   // Stripe line items (precios con IVA incluidos)
+  // 🔴 CAMBIO IMPORTANTE: unit_amount_decimal debe ser string
   const stripeLineItems = computeTotals(lines).lines.map((l) => ({
     quantity: l.qty,
     price_data: {
       currency: t.currency.toLowerCase(),
       product_data: { name: `${l.title} (${l.ref})` },
-      unit_amount_decimal: Math.round(l.unitIncVat * 100), // en céntimos
+      // Antes: Math.round(l.unitIncVat * 100)
+      unit_amount_decimal: Math.round(l.unitIncVat * 100).toString(), // ahora es string
     },
   }))
 
