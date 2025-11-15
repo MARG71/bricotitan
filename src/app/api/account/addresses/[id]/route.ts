@@ -29,7 +29,7 @@ export async function PATCH(request: Request, context: any) {
     fullName,
     line1,
     line2,
-    postalCode,
+    // postalCode, // ⚠️ En Prisma no existe este campo con este nombre
     city,
     province,
     country,
@@ -43,7 +43,7 @@ export async function PATCH(request: Request, context: any) {
       fullName,
       line1,
       line2,
-      postalCode,
+      // postalCode, // ❌ Lo quitamos para que Prisma no se queje
       city,
       province,
       country,
