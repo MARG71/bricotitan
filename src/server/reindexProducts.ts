@@ -1,12 +1,16 @@
 /* eslint-disable no-console */
 /* eslint-disable no-console */
 import { PrismaClient } from '@prisma/client';
+import type { Index } from 'meilisearch';
+
 import { meili, productsIndexName, getOrCreateProductsIndex } from '../lib/meili';
 import { mapProductoToDoc } from '../lib/search/mappers';
 import { applyProductsIndexSettings } from '../lib/search/settings';
 
 const prisma = new PrismaClient();
 const BATCH = 1000;
+
+type AnyDoc = Record<string, any>;
 
 function getProductModel() {
   const p = prisma as any;
@@ -28,7 +32,9 @@ async function* productStream(batchSize: number) {
       },
       orderBy: { updatedAt: 'desc' }, // usa createdAt o id si prefieres
     });
+
     if (!items.length) break;
+
     yield items;
     skip += items.length;
   }
@@ -36,12 +42,17 @@ async function* productStream(batchSize: number) {
 
 export async function runReindex() {
   console.time('reindex');
-  const index = await getOrCreateProductsIndex();
+
+  // getOrCreateProductsIndex puede devolver Index | EnqueuedTask,
+  // pero aquí SOLO lo usamos como Index
+  const index = (await getOrCreateProductsIndex()) as Index<AnyDoc>;
 
   console.log('🧹 Limpiando documentos…');
   try {
     await index.deleteAllDocuments();
-  } catch {}
+  } catch {
+    // si falla (índice vacío, etc.), seguimos adelante
+  }
 
   await applyProductsIndexSettings();
 
@@ -52,6 +63,7 @@ export async function runReindex() {
     sent += docs.length;
     console.log(`   → Encolados ${sent}`);
   }
+
   console.timeEnd('reindex');
 }
 
