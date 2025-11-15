@@ -1,10 +1,11 @@
-// src/app/(store)/[lang]/debug/page.tsx
+
 // src/app/(store)/[lang]/page.tsx
+// src/app/(store)/[lang]/debug/page.tsx
 import CategoryCard from '@/components/store/CategoryCard'
 import ProductCard from '@/components/store/ProductCard'
 import { getHomeData } from '@/lib/catalog'
 
-export default async function HomePage({ params }: { params: { lang: string } }) {
+export default async function HomePage({ params }: any) {
   const { lang } = params
   const data = await getHomeData(lang)
 
