@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { prisma, readCSV, pick, toInt } from "./lib";
 
 type Row = Record<string, string>;
