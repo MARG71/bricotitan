@@ -1,4 +1,5 @@
 // src/app/api/account/addresses/route.ts
+// src/app/api/account/addresses/route.ts
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requireAuth } from '@/lib/auth'
@@ -31,14 +32,20 @@ export async function POST(request: Request) {
     fullName,
     line1,
     line2,
-    // postalCode,  // ⚠️ No lo usamos porque Prisma se quejaba
     city,
-    // province,    // ⚠️ Tampoco lo usamos por el mismo motivo
     country,
     isDefault,
   } = body
 
-  // Creamos la dirección solo con campos que sabemos que existen
+  // Prisma exige un campo "postal" obligatorio en Address
+  const postal: string =
+    typeof body.postal === 'string'
+      ? body.postal
+      : typeof body.postalCode === 'string'
+        ? body.postalCode
+        : ''
+
+  // Creamos la dirección solo con campos que sabemos que existen en el modelo
   const created = await prisma.address.create({
     data: {
       fullName,
@@ -46,6 +53,7 @@ export async function POST(request: Request) {
       line2,
       city,
       country,
+      postal, // ✅ campo obligatorio en el modelo
       isDefault: !!isDefault,
       userId: session.user.id,
     },
