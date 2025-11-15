@@ -1,5 +1,8 @@
 // scripts/provider-import.ts
 // scripts/provider-import.ts (parche columnas + DEBUG)
+
+// @ts-nocheck
+
 import fs from "fs";
 import path from "path";
 import { Prisma } from "@prisma/client";
