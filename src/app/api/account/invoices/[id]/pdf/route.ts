@@ -1,37 +1,60 @@
 // src/app/api/account/invoices/[id]/pdf/route.ts
-import { NextRequest, NextResponse } from 'next/server'
+// src/app/api/account/invoices/[id]/pdf/route.ts
+import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getServerAuth } from '@/lib/auth'
 
-export async function GET(req: NextRequest, context: any) {
-  // 👇 recogemos el id desde el contexto (compatible con Next 15)
-  const { id } = await context.params
+// Tipo mínimo para que TS sepa que existe session.user.id
+type AuthSession = {
+  user: {
+    id: string
+  }
+}
 
-  const session = await getServerAuth()
+export async function GET(
+  _req: Request,
+  context: { params: { id: string } }
+) {
+  const { id } = context.params
+
+  // getServerAuth puede devolver null si no hay sesión
+  const session = (await getServerAuth()) as AuthSession | null
+
   if (!session?.user?.id) {
     return NextResponse.json({ error: 'UNAUTHENTICATED' }, { status: 401 })
   }
 
+  // Comprobamos que la factura existe y pertenece al usuario
   const invoice = await prisma.invoice.findFirst({
     where: {
-      id, // 👈 usamos la variable id que viene de la URL
-      order: { userId: session.user.id },
+      id,
+      order: {
+        userId: session.user.id,
+      },
     },
-    select: { pdfPath: true, number: true },
+    select: {
+      id: true,
+      number: true,
+      issuedAt: true,
+      total: true,
+      order: {
+        select: {
+          id: true,
+          currency: true,
+        },
+      },
+    },
   })
 
   if (!invoice) {
     return NextResponse.json({ error: 'NOT_FOUND' }, { status: 404 })
   }
 
-  // De momento devolvemos un TXT amigable (stub)
-  const body = `Factura ${invoice.number}\n(La generación de PDF se activará en la integración de Stripe/AFT)`
-  return new NextResponse(body, {
-    status: 200,
-    headers: {
-      'Content-Type': 'text/plain; charset=utf-8',
-      'Content-Disposition': `attachment; filename="${invoice.number}.txt"`,
-    },
+  // 🔧 Aquí iría la generación real del PDF.
+  // De momento devolvemos un placeholder para que compile y el endpoint responda algo válido.
+
+  return NextResponse.json({
+    message: 'PDF generation not implemented yet',
+    invoiceId: invoice.id,
   })
 }
-
