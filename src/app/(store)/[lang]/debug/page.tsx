@@ -6,8 +6,12 @@ import CategoryCard from '@/components/store/CategoryCard'
 import ProductCard from '@/components/store/ProductCard'
 import { getHomeData } from '@/lib/catalog'
 
-export default async function HomePage({ params }: { params: { lang: string } }) {
-  const { lang } = params
+type HomePageProps = {
+  params: Promise<{ lang: string }>
+}
+
+export default async function HomePage({ params }: HomePageProps) {
+  const { lang } = await params
   const data = await getHomeData(lang)
 
   return (
