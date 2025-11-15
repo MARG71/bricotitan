@@ -2,8 +2,21 @@ import Link from 'next/link'
 import { requireAuth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
-function money(n: number | string | null | undefined, currency = 'EUR') {
-  const v = typeof n === 'string' ? Number(n) : n ?? 0
+// Aceptamos cualquier tipo (incluye Decimal) y dentro lo convertimos a número
+function money(n: any, currency = 'EUR') {
+  let v: number
+
+  if (typeof n === 'string') {
+    v = Number(n)
+  } else if (typeof n === 'number') {
+    v = n
+  } else if (n != null) {
+    // Prisma Decimal u otros tipos -> intentamos convertir
+    v = Number(n)
+  } else {
+    v = 0
+  }
+
   return Intl.NumberFormat('es-ES', { style: 'currency', currency }).format(v)
 }
 
