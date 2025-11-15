@@ -63,19 +63,10 @@ function getUnifiedBullets(product: any, i18n: unknown): BulletNorm[] {
 }
 
 // -----------------------------
-// Next.js params
-// -----------------------------
-// Next.js params
-type ProductPageParams = { lang: string; slug: string }
-type ProductPageProps = { params: ProductPageParams }
-
-// -----------------------------
 // SEO
-export async function generateMetadata(
-  { params }: ProductPageProps
-): Promise<Metadata> {
-
-  const { lang, slug } = params
+export async function generateMetadata(props: any): Promise<Metadata> {
+  // En Next 15 params puede ser objeto o Promise: usamos await para soportar ambas
+  const { lang, slug } = await props.params
   const data = await getProductBySlug(slug, lang)
   if (!data?.product) return {}
 
@@ -103,9 +94,10 @@ export async function generateMetadata(
 
 // -----------------------------
 // Page (Server Component)
-export default async function ProductPage({ params }: ProductPageProps) {
+export default async function ProductPage(props: any) {
+  // Igual: soportamos que Next pase params como Promise
+  const { lang, slug } = await props.params
 
-  const { lang, slug } = params
   const data = await getProductBySlug(slug, lang)
   if (!data?.product) notFound()
 
@@ -229,7 +221,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
                     className="mb-2 h-36 w-full rounded-lg object-cover"
                     loading="lazy"
                   />
-
 
                   <div className="line-clamp-2 text-sm group-hover:underline">
                     {card.name}
