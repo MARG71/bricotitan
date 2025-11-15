@@ -1,6 +1,7 @@
 // src/lib/catalog.ts
+// src/lib/catalog.ts
 import { prisma } from '@/lib/prisma'
-import type { Locale } from './i18n' // ⬅️ SOLO el tipo; si no existe, usa: type Locale = string
+import type { Locale } from './i18n' // Si no existe, sustituye por: type Locale = string
 
 /** ==== Tipos para el front ==== */
 export type ProductCard = {
@@ -285,13 +286,27 @@ export async function getProductBySlug(slug: string, lang: string) {
     const i18nName = i18n?.name ?? product.name ?? null
 
     // Variantes (productos con mismo idAgrupacion)
-    let variantes = []
+    type VarianteLite = {
+      id: number
+      slug: string | null
+      name: string | null
+      ordenCombo: number | null
+    }
+
+    let variantes: VarianteLite[] = []
     if (product.idAgrupacion) {
-      variantes = await prisma.product.findMany({
+      const rawVariantes = await prisma.product.findMany({
         where: { idAgrupacion: product.idAgrupacion },
         select: { id: true, slug: true, name: true, ordenCombo: true },
         orderBy: [{ ordenCombo: 'asc' }],
       })
+
+      variantes = rawVariantes.map((v) => ({
+        id: v.id,
+        slug: v.slug,
+        name: v.name,
+        ordenCombo: v.ordenCombo,
+      }))
     }
 
     // Relacionados (por XREF tipo 'related')
