@@ -12,11 +12,10 @@ type AuthSession = {
 }
 
 // PATCH → actualizar dirección (y gestionar "predeterminada")
-export async function PATCH(
-  request: Request,
-  { params }: { params: { id: string } },
-) {
-  const { id } = params
+export async function PATCH(request: Request, context: any) {
+  // Usamos any para evitar problemas con el tipo del segundo argumento en Next 15
+  const { id } = (context.params ?? {}) as { id: string }
+
   const session = (await requireAuth()) as AuthSession
 
   const body = await request.json()
@@ -61,8 +60,8 @@ export async function PATCH(
 
 // DELETE → borrar una dirección del usuario
 export async function DELETE(_request: Request, context: any) {
-  // Usamos any para que Next 15 no proteste por el tipo del segundo argumento
-  const { id } = context.params as { id: string }
+  // También any aquí para que Next 15 no proteste
+  const { id } = (context.params ?? {}) as { id: string }
 
   const session = (await requireAuth()) as AuthSession
 
