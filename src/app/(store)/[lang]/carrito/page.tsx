@@ -1,6 +1,5 @@
 'use client'
 
-
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 
@@ -17,7 +16,7 @@ function money(n?: number) {
   return Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(n ?? 0)
 }
 
-export default function CartPage({ params }: { params: { lang: string } }) {
+export default function CartPage() {
   const [lines, setLines] = useState<CartLine[]>([])
   const [loading, setLoading] = useState(false)
   const { lang } = useParams<{ lang: string }>()  // 👈 idioma desde la URL
@@ -45,7 +44,6 @@ export default function CartPage({ params }: { params: { lang: string } }) {
     if (lines.length === 0) return
     setLoading(true)
     try {
-      
       const res = await fetch(`/api/checkout?lang=${lang}`, {  
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -89,7 +87,9 @@ export default function CartPage({ params }: { params: { lang: string } }) {
                 <div className="text-gray-600">Ref: {l.ref} · {l.qty} ud. · IVA {l.vatRate}%</div>
               </div>
               <div className="text-right">
-                <div className="font-semibold">{money((l.priceExVat*(1+l.vatRate/100))*l.qty)}</div>
+                <div className="font-semibold">
+                  {money((l.priceExVat*(1+l.vatRate/100))*l.qty)}
+                </div>
                 <button
                   onClick={() => remove(i)}
                   className="mt-2 text-xs rounded border px-2 py-1 hover:bg-gray-50"
