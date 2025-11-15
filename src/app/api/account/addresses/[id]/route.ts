@@ -4,10 +4,6 @@ import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requireAuth } from '@/lib/auth'
 
-type RouteContext = {
-  params: { id: string }
-}
-
 // Sesión mínima que necesitamos
 type AuthSession = {
   user: {
@@ -15,8 +11,11 @@ type AuthSession = {
   }
 }
 
-// Actualizar dirección (y gestionar "predeterminada")
-export async function PATCH(request: Request, { params }: RouteContext) {
+// PATCH → actualizar dirección (y gestionar "predeterminada")
+export async function PATCH(
+  request: Request,
+  { params }: { params: { id: string } },
+) {
   const { id } = params
   const session = (await requireAuth()) as AuthSession
 
@@ -33,7 +32,7 @@ export async function PATCH(request: Request, { params }: RouteContext) {
     isDefault,
   } = body
 
-  // Actualizamos la dirección del usuario
+  // Actualizamos la dirección
   const updated = await prisma.address.update({
     where: { id },
     data: {
@@ -45,11 +44,12 @@ export async function PATCH(request: Request, { params }: RouteContext) {
       province,
       country,
       isDefault: !!isDefault,
+      userId: session.user.id, // por seguridad, la ligamos al usuario
     },
   })
 
+  // Si esta se marca como predeterminada, desmarcamos el resto
   if (isDefault) {
-    // Quitamos el "default" del resto de direcciones del usuario
     await prisma.address.updateMany({
       where: { userId: session.user.id, NOT: { id } },
       data: { isDefault: false },
@@ -59,12 +59,15 @@ export async function PATCH(request: Request, { params }: RouteContext) {
   return NextResponse.json(updated)
 }
 
-// Borrar una dirección del usuario
-export async function DELETE(_request: Request, { params }: RouteContext) {
+// DELETE → borrar una dirección del usuario
+export async function DELETE(
+  _request: Request,
+  { params }: { params: { id: string } },
+) {
   const { id } = params
   const session = (await requireAuth()) as AuthSession
 
-  // Nos aseguramos de borrar solo direcciones del usuario
+  // Solo borramos si la dirección pertenece al usuario
   await prisma.address.deleteMany({
     where: { id, userId: session.user.id },
   })
