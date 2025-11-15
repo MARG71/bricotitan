@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { cldUrl } from '@/lib/cloudinaryUrl' // ⬅️ NUEVO
+import { cldUrl } from '@/lib/cloudinaryUrl'
 
 /** === Tipos admitidos (hit de Meili o item del catálogo) === */
 type MeiliHit = {
@@ -32,30 +32,27 @@ type Props =
 
 /** Normaliza y NO falla aunque falten campos */
 function normalize(hit?: MeiliHit, item?: CatalogItem) {
-  const fromHit = hit ?? {}
-  const fromItem = item ?? {}
-
   // Título: preferimos title (Meili) > name (BD) > "Producto"
   const title =
-    (typeof fromHit.title === 'string' && fromHit.title.trim()) ||
-    (typeof fromItem.name === 'string' && fromItem.name.trim()) ||
+    (typeof hit?.title === 'string' && hit.title.trim()) ||
+    (typeof item?.name === 'string' && item.name.trim()) ||
     'Producto'
 
   // Slug: puede venir de hit o de item
-  const slug = (fromHit.slug || fromItem.slug)?.toString()
+  const slug = (hit?.slug ?? item?.slug)?.toString()
 
   // Marca
-  const brand = fromHit.brand ?? fromItem.brand ?? null
+  const brand = hit?.brand ?? item?.brand ?? null
 
-  // Imagen
-  const imageUrl = fromHit.imageUrl ?? fromItem.imageUrl ?? null
+  // Imagen (puede ser URL o publicId de Cloudinary)
+  const imageUrl = hit?.imageUrl ?? item?.imageUrl ?? null
 
   // Precio base: Meili (price) o BD (priceExVat)
-  let base = Number(fromHit.price ?? (fromItem.priceExVat ?? 0))
+  let base = Number(hit?.price ?? (item?.priceExVat ?? 0))
   base = Number.isFinite(base) ? base : 0
 
   // Oferta si hay salePrice válido y menor que base
-  const sale = Number(fromHit.salePrice ?? NaN)
+  const sale = Number(hit?.salePrice ?? NaN)
   const hasOffer = Number.isFinite(sale) && sale > 0 && sale < base
 
   const price = hasOffer ? sale : base
@@ -63,12 +60,11 @@ function normalize(hit?: MeiliHit, item?: CatalogItem) {
 
   // Stock
   const inStock =
-    fromHit.inStock ??
-    (typeof fromItem.stock === 'number' ? fromItem.stock > 0 : true)
+    hit?.inStock ??
+    (typeof item?.stock === 'number' ? item.stock > 0 : true)
 
   // Rating
-  const rating =
-    typeof fromHit.rating === 'number' ? fromHit.rating : null
+  const rating = typeof hit?.rating === 'number' ? hit.rating : null
 
   return { slug, title, brand, imageUrl, price, basePrice, hasOffer, inStock, rating }
 }
@@ -81,15 +77,18 @@ export default function ProductCard({ lang, hit, item }: Props) {
     Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' }).format(n)
 
   const stars = Math.max(0, Math.min(5, Math.round(rating ?? 0)))
-  const resolvedSrc = cldUrl(undefined, imageUrl ?? null, { width: 600 })
 
-  const CardInner = (
+  // Resolvemos la URL final con Cloudinary (o usamos placeholder)
+  const resolvedSrc =
+    cldUrl(undefined, imageUrl ?? null, { width: 600 }) || '/placeholder.svg'
+
+  const CardContent = (
     <>
       {/* Imagen */}
       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={imageUrl ?? '/placeholder.svg'}
+          src={resolvedSrc}
           alt={title}
           className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
           loading="lazy"
@@ -103,7 +102,10 @@ export default function ProductCard({ lang, hit, item }: Props) {
 
         <span
           className={`absolute right-2 top-2 rounded-full px-2 py-0.5 text-[11px] font-medium shadow
-            ${inStock ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'}`}
+            ${inStock
+              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+              : 'bg-amber-50 text-amber-700 border border-amber-200'
+            }`}
         >
           {inStock ? 'En stock' : 'Sin stock'}
         </span>
@@ -118,12 +120,18 @@ export default function ProductCard({ lang, hit, item }: Props) {
       {/* Texto */}
       <div className="mt-2">
         <div className="text-[12px] text-gray-500">{brand ?? '—'}</div>
-        <div className="line-clamp-2 text-[14px] font-medium text-gray-900">{title}</div>
+        <div className="line-clamp-2 text-[14px] font-medium text-gray-900">
+          {title}
+        </div>
 
         <div className="mt-1 flex items-center gap-2">
-          <div className="text-[15px] font-semibold text-gray-900">{fmt(price)}</div>
+          <div className="text-[15px] font-semibold text-gray-900">
+            {fmt(price)}
+          </div>
           {basePrice != null && (
-            <div className="text-xs text-gray-400 line-through">{fmt(basePrice)}</div>
+            <div className="text-xs text-gray-400 line-through">
+              {fmt(basePrice)}
+            </div>
           )}
         </div>
 
@@ -143,7 +151,9 @@ export default function ProductCard({ lang, hit, item }: Props) {
                 />
               </svg>
             ))}
-            <span className="ml-1 text-[11px] text-gray-500">{Number(rating ?? 0).toFixed(1)}</span>
+            <span className="ml-1 text-[11px] text-gray-500">
+              {Number(rating ?? 0).toFixed(1)}
+            </span>
           </div>
         )}
       </div>
@@ -153,23 +163,16 @@ export default function ProductCard({ lang, hit, item }: Props) {
   return (
     <li className="group rounded-2xl border p-3 shadow-[0_1px_0_rgba(0,0,0,0.04)] transition hover:shadow-md bg-white">
       {slug ? (
-        <Link href={`/${lang}/p/${slug}`} className="block group no-underline focus-visible:outline-none">
-          <>
-            <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-50">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={resolvedSrc}
-                alt={title}
-                className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
-                loading="lazy"
-              />
-              {/* ...badges... */}
-            </div>
-            {/* ...texto... */}
-          </>
+        <Link
+          href={`/${lang}/p/${slug}`}
+          className="block group no-underline focus-visible:outline-none"
+        >
+          {CardContent}
         </Link>
       ) : (
-        <div className="block opacity-95 cursor-default">{/* ... */}</div>
+        <div className="block cursor-default opacity-95">
+          {CardContent}
+        </div>
       )}
     </li>
   )
