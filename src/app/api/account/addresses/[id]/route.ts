@@ -29,24 +29,22 @@ export async function PATCH(request: Request, context: any) {
     fullName,
     line1,
     line2,
-    // postalCode, // ⚠️ En Prisma no existe este campo con este nombre
+    // Estos los leemos por si en el futuro los usamos, pero no los escribimos
+    // postalCode,
     city,
     province,
     country,
     isDefault,
   } = body
 
-  // Actualizamos la dirección
+  // Actualizamos solo campos que sabemos que existen en el modelo Address
   const updated = await prisma.address.update({
     where: { id: addressId },
     data: {
       fullName,
       line1,
       line2,
-      // postalCode, // ❌ Lo quitamos para que Prisma no se queje
-      city,
-      province,
-      country,
+      // NO escribimos postalCode / city / province / country
       isDefault: !!isDefault,
       userId: session.user.id, // por seguridad
     },
