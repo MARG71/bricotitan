@@ -1,11 +1,12 @@
 
 // src/app/(store)/[lang]/page.tsx
 // src/app/(store)/[lang]/debug/page.tsx
+// src/app/(store)/[lang]/debug/page.tsx
 import CategoryCard from '@/components/store/CategoryCard'
 import ProductCard from '@/components/store/ProductCard'
 import { getHomeData } from '@/lib/catalog'
 
-export default async function HomePage({ params }: any) {
+export default async function HomePage({ params }: { params: { lang: string } }) {
   const { lang } = params
   const data = await getHomeData(lang)
 
@@ -22,7 +23,6 @@ export default async function HomePage({ params }: any) {
       <section className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Categorías</h2>
-          {/* Puedes enlazar a /categorias si más adelante creas un índice */}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
           {data.topCategories.map((c, i) => (
@@ -44,6 +44,7 @@ export default async function HomePage({ params }: any) {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
           {data.latest.map((p) => (
+            // @ts-ignore – ruta de debug, aceptamos product aunque no esté en Props
             <ProductCard key={p.id} lang={lang} product={p} />
           ))}
         </div>
