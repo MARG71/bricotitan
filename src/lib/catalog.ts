@@ -288,8 +288,8 @@ export async function getProductBySlug(slug: string, lang: string) {
     // Variantes (productos con mismo idAgrupacion)
     type VarianteLite = {
       id: number
-      slug: string | null
-      name: string | null
+      slug: string
+      name: string
       ordenCombo: number | null
     }
 
@@ -301,12 +301,14 @@ export async function getProductBySlug(slug: string, lang: string) {
         orderBy: [{ ordenCombo: 'asc' }],
       })
 
-      variantes = rawVariantes.map((v) => ({
-        id: v.id,
-        slug: v.slug,
-        name: v.name,
-        ordenCombo: v.ordenCombo,
-      }))
+      variantes = rawVariantes
+        .filter((v) => !!v.slug) // solo variantes con slug
+        .map((v) => ({
+          id: v.id,
+          slug: v.slug as string,
+          name: v.name ?? product.name ?? `Variante ${v.id}`,
+          ordenCombo: v.ordenCombo ?? null,
+        }))
     }
 
     // Relacionados (por XREF tipo 'related')
