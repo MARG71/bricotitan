@@ -1,24 +1,54 @@
 // src/app/api/account/addresses/[id]/route.ts
+// src/app/api/account/addresses/[id]/route.ts
 import { NextResponse } from 'next/server'
-import { requireAuth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
+import { requireAuth } from '@/lib/auth'
 
-// PATCH: actualizar dirección (marcar como defecto, etc.)
-export async function PATCH(req: Request, context: any) {
-  const { id: idParam } = await context.params
-  const session = await requireAuth()
+type RouteContext = {
+  params: { id: string }
+}
 
-  const id = Number(idParam)
-  if (Number.isNaN(id)) {
-    return NextResponse.json({ error: 'Bad id' }, { status: 400 })
+// Sesión mínima que necesitamos
+type AuthSession = {
+  user: {
+    id: string
   }
+}
 
-  const body = (await req.json().catch(() => null)) as { isDefault?: boolean } | null
-  if (!body) {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
-  }
+// Actualizar dirección (y gestionar "predeterminada")
+export async function PATCH(request: Request, { params }: RouteContext) {
+  const { id } = params
+  const session = (await requireAuth()) as AuthSession
 
-  if (body.isDefault) {
+  const body = await request.json()
+
+  const {
+    fullName,
+    line1,
+    line2,
+    postalCode,
+    city,
+    province,
+    country,
+    isDefault,
+  } = body
+
+  // Actualizamos la dirección del usuario
+  const updated = await prisma.address.update({
+    where: { id },
+    data: {
+      fullName,
+      line1,
+      line2,
+      postalCode,
+      city,
+      province,
+      country,
+      isDefault: !!isDefault,
+    },
+  })
+
+  if (isDefault) {
     // Quitamos el "default" del resto de direcciones del usuario
     await prisma.address.updateMany({
       where: { userId: session.user.id, NOT: { id } },
@@ -26,24 +56,18 @@ export async function PATCH(req: Request, context: any) {
     })
   }
 
-  const updated = await prisma.address.update({
-    where: { id },
-    data: { isDefault: body.isDefault ?? undefined },
-  })
-
   return NextResponse.json(updated)
 }
 
-// DELETE: eliminar dirección
-export async function DELETE(req: Request, context: any) {
-  const { id: idParam } = await context.params
-  await requireAuth()
+// Borrar una dirección del usuario
+export async function DELETE(_request: Request, { params }: RouteContext) {
+  const { id } = params
+  const session = (await requireAuth()) as AuthSession
 
-  const id = Number(idParam)
-  if (Number.isNaN(id)) {
-    return NextResponse.json({ error: 'Bad id' }, { status: 400 })
-  }
+  // Nos aseguramos de borrar solo direcciones del usuario
+  await prisma.address.deleteMany({
+    where: { id, userId: session.user.id },
+  })
 
-  await prisma.address.delete({ where: { id } })
   return NextResponse.json({ ok: true })
 }
