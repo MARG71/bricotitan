@@ -19,16 +19,11 @@ export async function GET(_req: Request, { params }: any) {
 
   const orderId = String(params?.id)
 
-  // Buscamos el pedido del usuario autenticado
+  // Buscamos el pedido del usuario autenticado (sin relaciones extra)
   const order = await prisma.order.findFirst({
     where: {
       id: orderId,
       userId: session.user.id,
-    },
-    include: {
-      items: true,
-      address: true,
-      invoice: true,
     },
   })
 
