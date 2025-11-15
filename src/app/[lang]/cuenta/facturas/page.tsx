@@ -7,15 +7,24 @@ function money(n: number | string | null | undefined, currency = 'EUR') {
   return Intl.NumberFormat('es-ES', { style: 'currency', currency }).format(v)
 }
 
-export default async function FacturasPage({
-  params,
-}: {
+// Tipamos los props de la página para Next 15 (params como Promesa)
+type FacturasPageProps = {
   params: Promise<{ lang: string }>
-}) {
+}
+
+// Tipado mínimo de la sesión que necesitamos
+type AuthSession = {
+  user: {
+    id: string
+  }
+}
+
+export default async function FacturasPage({ params }: FacturasPageProps) {
   // Next 15: params es una Promesa en Server Components
   const { lang } = await params
 
-  const session = await requireAuth()
+  // Forzamos el tipo para que TS sepa que hay user.id
+  const session = (await requireAuth()) as AuthSession
 
   const invoices = await prisma.invoice.findMany({
     where: { order: { userId: session.user.id } },
@@ -71,7 +80,7 @@ export default async function FacturasPage({
                 {money(inv.total, inv.order?.currency ?? 'EUR')}
               </div>
 
-              {/* Endpoint de descarga (placeholder): ajusta si tu ruta es distinta */}
+              {/* Endpoint de descarga: ajusta si tu ruta es distinta */}
               <a
                 href={`/api/account/invoices/${inv.id}/pdf`}
                 className="mt-2 inline-block rounded-xl border px-3 py-1.5 text-sm hover:bg-gray-50"
