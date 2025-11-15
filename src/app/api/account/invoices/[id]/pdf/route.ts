@@ -11,13 +11,10 @@ type AuthSession = {
   }
 }
 
-export async function GET(
-  _req: Request,
-  context: { params: { id: string } }
-) {
-  const { id } = context.params
+export async function GET(_req: Request, context: any) {
+  // Forzamos el tipo aquí en vez de tipar el argumento
+  const { id } = context.params as { id: string }
 
-  // getServerAuth puede devolver null si no hay sesión
   const session = (await getServerAuth()) as AuthSession | null
 
   if (!session?.user?.id) {
@@ -51,8 +48,7 @@ export async function GET(
   }
 
   // 🔧 Aquí iría la generación real del PDF.
-  // De momento devolvemos un placeholder para que compile y el endpoint responda algo válido.
-
+  // De momento devolvemos algo sencillo para que compile y funcione el endpoint.
   return NextResponse.json({
     message: 'PDF generation not implemented yet',
     invoiceId: invoice.id,
